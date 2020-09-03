@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :validatable,
-  :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
+  :recoverable, :rememberable, :validatable
+
+  has_many :notes, foreign_key: :user_id
 end
