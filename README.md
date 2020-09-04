@@ -1,6 +1,6 @@
-# Welcome to Note Storage
+# Welcome to User Notes
 
-This is a simple note storage application using Ruby on Rails. For demo of this application please follow this link [Note Storage Demo Application](https://note-storage.herokuapp.com).
+This is a simple note storage application using Ruby on Rails for api service. For demo of this application please follow this link [Note Storage Demo Application](https://note-storage.herokuapp.com).
 
 ## Application Description
 - User can signup into this application by providing email, password and password confirmation.
