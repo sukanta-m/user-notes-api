@@ -56,4 +56,12 @@ RSpec.describe Users::SessionsController, :type => :api do
       end
     end
   end
+
+  describe "DELETE #logout" do
+    it "returns http status 200" do
+      auth_setup(user)
+      delete "/logout"
+      expect(last_response.status).to eq(200)
+    end
+  end
 end
