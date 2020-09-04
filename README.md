@@ -1,24 +1,36 @@
-# README
+# Welcome to Note Storage
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple note storage application using Ruby on Rails. For demo of this application please follow this link [Note Storage Demo Application](https://note-storage.herokuapp.com).
 
-Things you may want to cover:
+## Application Description
+- User can signup into this application by providing email, password and password confirmation.
+- User can login into this application by providing email and password.
+- User can create note by clicking *New Note* button.
+- User can edit note by clicking *Edit* link of respective note.
+- User can delete note by clicking *Delete* link of respective note.
+- User can search note by using search form.
+- User can logout from application by clicking *Log Out* link at the navbar.
 
-* Ruby version
+## Technical Stack
+- Ruby v2.6.6
+- Rails v6.0.3
+- postgres 1.2.3
 
-* System dependencies
+## Development Setup
 
-* Configuration
+- Set up Ruby on Rails on linux based OS. For installation please follow this link [Ruby and Rails Installation Guide](https://gorails.com/setup/ubuntu/18.04). Here please use **RVM** for the development.
+- Clone this repository into your system. [Clone GitHub Repository Guide](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
+- Open terminal and go to the project path.
+- It will create one gemset for this project. Please install bundler first. For the installation of bundler please run this bellow command.
+  > gem install bundler
+- Install all gem by following bellow command.
+  > bundle install
+- Start rails server with bellow command.
+    > rails server
+- Visit [http://localhost:3000](http://localhost:3000). You are on home page.
 
-* Database creation
+## Testing
 
-* Database initialization
+Rspec is there for unit testing. After running test suite one test coverage will be generated inside the project folder. For this test coverage *SimpleCov* has been used.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![test coverage](https://github.com/sukanta-m/user-notes-api/blob/master/vendor/coverage.png?raw=true)
