@@ -23,9 +23,7 @@ class ApplicationController < ActionController::API
   # Deconstructs the Authorization header and decodes the JWT token.
   def payload
     auth_header = request.headers['Authorization']
-    p auth_header
     token = auth_header.split(' ').last
-    p token
     JsonWebToken.decode(token)
   rescue
     nil

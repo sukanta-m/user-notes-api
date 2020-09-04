@@ -17,9 +17,9 @@ class Users::SessionsController < Devise::SessionsController
     if resource && active_for_authentication?(resource)
       if invalid_for_authentication?(resource, params[:password])
         render json: {errors: 'Invalid username / password'}, status: :unauthorized
+      else
+        respond_with(resource, active: true)
       end
-
-      respond_with(resource, active: true)
     else
       render json: {errors: 'User is not yet registered'}, status: :unauthorized
     end
@@ -34,10 +34,6 @@ class Users::SessionsController < Devise::SessionsController
       status: {code: 200, message: 'Logged in successfully.', active: _opts[:active]},
       data: UserSerializer.new(resource).serializable_hash[:data][:attributes]
     }, status: :ok
-  end
-  
-  def respond_to_on_destroy
-    head :ok
   end
 
   private

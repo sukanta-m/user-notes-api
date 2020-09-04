@@ -3,7 +3,16 @@ class NotesController < ApplicationController
   before_action :set_note, only: [:update, :destroy]
 
   def index
-    notes = current_user.notes.includes(:user, :tags).by_join_date
+    notes = if params[:tags].blank?
+              current_user.notes.includes(:user, :tags).order_by_date
+            else
+              current_user.notes.tagged_with(params[:tags].split(","), :any => true).includes(:user, :tags).order_by_date
+            end
+
+    if params[:search].present?
+      notes = notes.search(params[:search])
+    end
+
     options = {}
     options[:include] = [:user]
     render json: NoteSerializer.new(notes, options).serializable_hash, status: :ok
@@ -11,7 +20,6 @@ class NotesController < ApplicationController
 
   def create
     note = current_user.notes.new(note_params)
-    note.tag_list = params[:tag_list].join(",")
     if note.save
       render json: NoteSerializer.new(note, {include: [:user]}).serializable_hash, status: :created
     else
@@ -42,6 +50,6 @@ class NotesController < ApplicationController
     end
 
     def note_params
-      params.require(:note).permit(:title, :body)
+      params.require(:note).permit(:title, :body, :tag_list => [])
     end
 end

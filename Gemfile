@@ -31,13 +31,15 @@ gem 'rack-cors'
 gem 'acts-as-taggable-on', '~> 6.0'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem "pry"
+  gem "faker", "~> 2.11"
+  gem "pry-rails", "~> 0.3.9"
+  gem "rspec-rails", "~> 4.0"
 end
 
 group :development do
   gem 'listen', '~> 3.2'
+  gem 'rubocop', '~> 0.90.0'
+  gem "rubocop-performance", "~> 1.5", ">= 1.5.2"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -45,6 +47,15 @@ end
 
 group :production do
   gem 'rails_12factor'
+end
+
+group :test do
+  gem "database_cleaner", "~> 1.8", ">= 1.8.3"
+  gem "factory_bot_rails", "~> 5.1", ">= 5.1.1"
+  gem "rails-controller-testing", "~> 1.0", ">= 1.0.4"
+  gem "shoulda-callback-matchers", "~> 1.1", ">= 1.1.4"
+  gem "shoulda-matchers", "~> 4.3"
+  gem "simplecov", "~> 0.18.5"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
