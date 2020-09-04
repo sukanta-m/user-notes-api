@@ -16,12 +16,12 @@ class Users::SessionsController < Devise::SessionsController
 
     if resource && active_for_authentication?(resource)
       if invalid_for_authentication?(resource, params[:password])
-        render json: {error: 'Invalid username / password'}, status: :unauthorized
+        render json: {errors: 'Invalid username / password'}, status: :unauthorized
       end
 
       respond_with(resource, active: true)
     else
-      render json: {error: 'User is not yet registered'}, status: :unauthorized
+      render json: {errors: 'User is not yet registered'}, status: :unauthorized
     end
   end
 

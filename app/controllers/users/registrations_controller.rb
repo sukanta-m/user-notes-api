@@ -6,6 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     resource.save
+
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
@@ -18,7 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      respond_with_error
+      respond_with_error resource
     end
   end
   private
@@ -32,8 +33,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     }, status: :ok
   end
 
-  def respond_with_error
-    render json: { errors: "Failed to signup" }, :status => 401
+  def respond_with_error(resource)
+    render json: { errors: resource.errors.full_messages.join(", ") }, :status => 401
   end
 
   def sign_up_params
