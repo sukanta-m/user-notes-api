@@ -22,14 +22,14 @@ RSpec.describe NotesController, :type => :api do
       auth_setup(user)
       get "/notes"
       body = JSON.parse(last_response.body)
-      expect(body["data"].length).to eq 1
+      expect(body["data"]["data"].length).to eq 1
     end
 
     it "return search record" do
       auth_setup(user)
       get "/notes", {search: "note1"}
       body = JSON.parse(last_response.body)
-      expect(body["data"].length).to eq 0
+      expect(body["data"]["data"].length).to eq 0
     end
   end
 

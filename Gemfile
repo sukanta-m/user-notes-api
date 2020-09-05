@@ -29,6 +29,7 @@ gem 'fast_jsonapi'
 gem 'rack-cors'
 
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'will_paginate', '~> 3.1.0'
 
 group :development, :test do
   gem "faker", "~> 2.11"

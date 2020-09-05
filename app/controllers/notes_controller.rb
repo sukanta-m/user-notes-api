@@ -12,10 +12,13 @@ class NotesController < ApplicationController
     if params[:search].present?
       notes = notes.search(params[:search])
     end
-
+    notes = notes.paginate(page: params[:page], per_page: 12)
     options = {}
     options[:include] = [:user]
-    render json: NoteSerializer.new(notes, options).serializable_hash, status: :ok
+    render json: {
+      data: NoteSerializer.new(notes, options).serializable_hash,
+      total: notes.count
+    }, status: :ok
   end
 
   def create
