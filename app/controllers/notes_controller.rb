@@ -26,7 +26,7 @@ class NotesController < ApplicationController
     if note.save
       render json: NoteSerializer.new(note, {include: [:user]}).serializable_hash, status: :created
     else
-      render json: note.errors.full_messages.join(", "), status: :unprocessable_entity
+      render json: {errors: note.errors.full_messages.join(", ")}, status: :unprocessable_entity
     end
   end
 
@@ -34,13 +34,16 @@ class NotesController < ApplicationController
     if @note.update(note_params)
       render json: NoteSerializer.new(@note, {include: [:user]}).serializable_hash, status: :created
     else
-      render json: @note.errors.full_messages.join(", "), status: :unprocessable_entity
+      render json: {errors: @note.errors.full_messages.join(", ")}, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @note.destroy
-    render json: @note.id, status: :ok
+    if @note.destroy
+      render json: @note.id, status: :ok
+    else
+      render json: {errors: @note.errors.full_messages.join(", ")}, status: :unprocessable_entity
+    end
   end
 
   def tags
